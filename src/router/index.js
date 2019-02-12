@@ -12,6 +12,7 @@ Vue.use(Router)
 
 export default new Router({
   routes: [  //路由的匹配规则
+    { path: '/', redirect:'/home'},
     { path: '/home', component: homeComponent},
     { path: '/member', component: memberComponent},
     { path: '/search', component: searchComponent},
