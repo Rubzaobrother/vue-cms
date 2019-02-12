@@ -6,6 +6,8 @@ import router from './router'
 import './styles/common.css'
 //引入mui的css
 import './libs/mui/css/mui.css'
+//引入mui扩展字体图片
+import './libs/mui/css/icons-extra.css'
 
 //1.导入mint-ui 和 样式文件
 import Mint from 'mint-ui';
