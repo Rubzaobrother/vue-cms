@@ -6,6 +6,10 @@ import homeComponent from '../pages/home'
 import memberComponent from '../pages/member'
 import searchComponent from '../pages/search'
 import shopcarComponent from '../pages/shopcar'
+import newsListComponent from '../pages/newsList'
+import newsInfoComponent from '../pages/newsInfo'
+
+
 
 
 Vue.use(Router)
@@ -17,6 +21,10 @@ export default new Router({
     { path: '/member', component: memberComponent},
     { path: '/search', component: searchComponent},
     { path: '/shopcar', component: shopcarComponent},
+    { path: '/home/newsList', component: newsListComponent},
+    { path: '/home/newsInfo/:id', component: newsInfoComponent},
+
+
     // {
     //   path: '/',
     //   name: 'HelloWorld',

@@ -12,6 +12,9 @@ import './libs/mui/css/mui.css'
 //引入mui扩展字体图片
 import './libs/mui/css/icons-extra.css'
 
+//设置请求的根路径
+Vue.http.options.root = 'http://www.lovegf.cn:8899/api/';
+
 //1.导入mint-ui 和 样式文件
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css';
@@ -20,6 +23,13 @@ import 'mint-ui/lib/style.css';
 Vue.use(Mint)
 
 Vue.config.productionTip = false
+
+import moment from 'moment'
+
+// 定义全局过滤器
+Vue.filter('dateFormat', function(dataStr, pattern = 'YYY-MM-DD HH:mm:ss'){
+  return  moment(dataStr).format(pattern)
+})
 
 /* eslint-disable no-new */
 new Vue({
