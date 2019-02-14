@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <mt-button type="danger" size="large" plain>加载更多</mt-button>
+    <mt-button type="danger" size="large" plain @click="getMore">加载更多</mt-button>
   </div>
 </template>
 
@@ -29,13 +29,20 @@ export default {
     this.getComments();
   },
   methods: {
-    getComments() {
+    getComments() {   //获取评论
       this.$http
         .get("getcomments/" + this.id + "?pageindex=" + this.pageIndex)
         .then(result => {
-          this.comments = result.body.message;
+          // this.comments = result.body.message;
+          // 获取评论拼接新数据
+          this.comments = this.comments.concat(result.body.message)
         });
+    },
+    getMore(){ //
+      this.pageIndex++;
+      this.getComments();
     }
+
   },
   props: ["id"]
 };
