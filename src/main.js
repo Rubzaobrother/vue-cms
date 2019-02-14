@@ -27,9 +27,13 @@ Vue.config.productionTip = false
 import moment from 'moment'
 
 // 定义全局过滤器
-Vue.filter('dateFormat', function(dataStr, pattern = 'YYY-MM-DD HH:mm:ss'){
+Vue.filter('dateFormat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss'){
   return  moment(dataStr).format(pattern)
 })
+
+//全局注册组件
+import comment from './components/comment.vue'
+Vue.component('comment',comment)
 
 /* eslint-disable no-new */
 new Vue({

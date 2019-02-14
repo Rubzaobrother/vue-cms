@@ -12,12 +12,12 @@
     <div class="content" v-html="newsInfo.content"></div>
 
     <!-- 评论子组件 -->
-    <comment></comment>
+    <comment :id="this.id"></comment>
   </div>
 </template>
 
 <script>
-import comments from '../../components/comment'
+// import comment from '../../components/comment'
 
 export default {
   data() {
@@ -43,9 +43,9 @@ export default {
       });
     }
   },
-  components: { //注册私有组件
-      comment
-  }
+  // components: { //注册私有组件
+  //     comment
+  // }
 };
 </script>
 
