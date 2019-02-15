@@ -34,7 +34,6 @@ export default {
     getNewsInfo() {
       //获取新闻详情
       this.$http.get("getnew/" + this.id).then(result => {
-        console.log(result);
         if (result.body.status === 0) {
           this.newsInfo = result.body.message[0];
         } else {
