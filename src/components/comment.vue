@@ -2,8 +2,8 @@
   <div class="cmt-container">
     <h3>发表评论</h3>
     <hr>
-    <textarea placeholder="请输入要BBBBB的内容(最多BBBBB120字)"></textarea>
-    <mt-button type="primary" size="large">发表评论</mt-button>
+    <textarea placeholder="请输入要BBBBB的内容(最多BBBBB120字)" v-model="commentContent"></textarea>
+    <mt-button type="primary" size="large" @click="postContent">发表评论</mt-button>
 
     <div class="cmt-list">
       <div class="cmt-item" v-for="(item, index) in comments" :key="item.add_time">
@@ -17,11 +17,13 @@
 </template>
 
 <script>
+import {Toast} from 'mint-ui';
 export default {
   data() {
     return {
       pageIndex: 1,
-      comments: []
+      comments: [],
+      commentContent:''
     };
   },
   //页面加载调用一次
@@ -41,8 +43,19 @@ export default {
     getMore(){ //
       this.pageIndex++;
       this.getComments();
+    },
+    postContent(){
+      if(this.commentContent.trim().length === 0) 
+      return Toast("内容不能为空"); 
+       this.$http.post('postcomment/' + this.id , {content : this.commentContent})
+       .then(result=>{
+         console.log(result.body)
+         this.comments = [];
+         this.pageIndex = 1;
+         this.getComments();
+         this.commentContent=''
+       })
     }
-
   },
   props: ["id"]
 };
