@@ -35,6 +35,10 @@ Vue.filter('dateFormat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss'){
 import comment from './components/comment.vue'
 Vue.component('comment',comment)
 
+// 安装vue-pic-preview
+import VuePreview from 'vue-pic-preview'
+Vue.use(VuePreview)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
