@@ -49,7 +49,10 @@ export default {
       return Toast("内容不能为空"); 
        this.$http.post('postcomment/' + this.id , {content : this.commentContent})
        .then(result=>{
-         console.log(result.body)
+          // 重新调用getComments
+          // 调用getComments之前, 需要注意几个问题:
+          //   1. 原有的数据需要被清空否则会出现重复拼接
+          //   2. 将pageIndex重置为1
          this.comments = [];
          this.pageIndex = 1;
          this.getComments();

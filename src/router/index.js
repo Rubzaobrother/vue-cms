@@ -8,6 +8,8 @@ import searchComponent from '../pages/search'
 import shopcarComponent from '../pages/shopcar'
 import newsListComponent from '../pages/newsList'
 import newsInfoComponent from '../pages/newsInfo'
+import photoListComponent from '../pages/photoList'
+
 
 
 
@@ -23,6 +25,8 @@ export default new Router({
     { path: '/shopcar', component: shopcarComponent},
     { path: '/home/newsList', component: newsListComponent},
     { path: '/home/newsInfo/:id', component: newsInfoComponent},
+    { path: '/home/photoList', component: photoListComponent},
+
 
 
     // {
