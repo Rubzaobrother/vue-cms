@@ -35,10 +35,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 #app {
   padding: 40px 0 50px;
   overflow-x: hidden;
+  .mint-header{
+    z-index: 999;
+  }
 }
 
 .v-enter {

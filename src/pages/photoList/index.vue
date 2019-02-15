@@ -10,7 +10,7 @@
             :class="['mui-control-item',{'mui-active' : item.id == 0}]"
             v-for="(item) in categories"
             :key="item.id"
-            @click="getcategories(item.id)"
+            @click="getPhotoList(item.id)"
           >{{ item.title }}</a>
         </div>
       </div>
@@ -33,7 +33,7 @@ import mui from "../../libs/mui/js/mui.js";
 export default {
   created() {
     this.getcategories();
-    this.getPhotoList();
+    this.getPhotoList(0);
   },
   mounted() {
     // 初始化操作必须要放在mounted钩子中, 让DOM元素加载完毕后才可以初始化
