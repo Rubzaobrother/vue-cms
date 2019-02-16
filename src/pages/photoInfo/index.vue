@@ -2,7 +2,7 @@
   <div class="photoinfo-container">
     <h3>{{ photoInfo.title }}</h3>
     <p class="subtitle">
-      <span>发表时间:{{ photoInfo.add_time | dateFormat}}</span>
+      <span>发表时间:{{ photoInfo.add_time | dateFormat }}</span>
       <span>点击:{{ photoInfo.click }}次</span>
     </p>
 
@@ -10,13 +10,14 @@
 
     <!-- 缩略图区域 -->
     <div class="thumbs">
-       <img 
-       class="preview-img" 
-       v-for="(item, index) in list"
-       :key="index"
-       :src="item.src" 
-       height="100" 
-       @click="$preview.open(index, list)" />
+      <img
+        class="preview-img"
+        v-for="(item, index) in list"
+        :key="item.id"
+        :src="item.src"
+        height="100"
+        @click="$preview.open(index, list)"
+      >
     </div>
 
     <!-- 图片内容区域 -->
@@ -53,8 +54,8 @@ export default {
             item.w = 600;
             item.h = 400;
           });
+          this.list = result.body.message;
         }
-        this.list = result.body.message;
       });
     }
   }

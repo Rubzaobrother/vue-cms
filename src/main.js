@@ -35,6 +35,11 @@ Vue.filter('dateFormat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss'){
 import comment from './components/comment.vue'
 Vue.component('comment',comment)
 
+//轮播图组件
+import swiper from './components/swiper.vue'
+Vue.component('swiper',swiper)
+
+
 // 安装vue-pic-preview
 import VuePreview from 'vue-pic-preview'
 Vue.use(VuePreview)
