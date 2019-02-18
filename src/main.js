@@ -35,6 +35,21 @@ Vue.filter('dateFormat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss'){
 import comment from './components/comment.vue'
 Vue.component('comment',comment)
 
+//注册vuex
+import Vuex from 'vuex'
+Vue.use(Vuex)
+var store = new Vuex.Store({
+  state:{//this.$store.state.***
+
+  },
+  mutations:{//this.$store.commit('方法名', 唯一的一个参数)
+
+  },
+  getters:{//this.$store.getters.***
+
+  }
+})
+
 //轮播图组件
 import swiper from './components/swiper.vue'
 Vue.component('swiper',swiper)
@@ -48,5 +63,6 @@ Vue.use(VuePreview)
 new Vue({
   el: '#app',
   router,
-  render: h => h(App)
+  render: h => h(App),
+  store
 })
