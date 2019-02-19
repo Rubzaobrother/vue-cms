@@ -40,7 +40,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 var store = new Vuex.Store({
   state:{//this.$store.state.***
-
+    car:[]
   },
   mutations:{//this.$store.commit('方法名', 唯一的一个参数)
 

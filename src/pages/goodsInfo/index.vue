@@ -41,7 +41,7 @@
               onafterpaste="this.value=this.value.replace(/[^\d]/g,'') "
               name="f_order"
               value="1"
-            >
+            >   
             <input
               @click="buyCount < goodsInfo.stock_quantity && buyCount++"
               type="button"
@@ -83,10 +83,10 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      Lunbotu: [],
-      goodsInfo: {},
-      buyCount: 1,
-      ballFlag: false
+      Lunbotu: [],  //轮播图
+      goodsInfo: {},  //商品信息
+      buyCount: 1,    
+      ballFlag: false,  //控制小球
     };
   },
   methods: {
@@ -113,6 +113,11 @@ export default {
     },
     addToShopCar() {
       this.ballFlag = !this.ballFlag;
+        // id: 商品id, count: 要购买的数量, price: 商品的单价, selected: false
+      var goodsinfo = {
+        id: this.id,
+        count: 
+      }
     },
     beforeEnter(el) {
       el.style.transform = "translate(0px, 0px)";
