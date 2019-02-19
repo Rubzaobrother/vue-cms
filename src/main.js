@@ -27,32 +27,47 @@ Vue.config.productionTip = false
 import moment from 'moment'
 
 // 定义全局过滤器
-Vue.filter('dateFormat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss'){
-  return  moment(dataStr).format(pattern)
+Vue.filter('dateFormat', function (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
+  return moment(dataStr).format(pattern)
 })
 
 //全局注册组件
 import comment from './components/comment.vue'
-Vue.component('comment',comment)
+Vue.component('comment', comment)
 
 //注册vuex
 import Vuex from 'vuex'
 Vue.use(Vuex)
 var store = new Vuex.Store({
-  state:{//this.$store.state.***
-    car:[]
+  state: {//this.$store.state.***
+    car: []
   },
-  mutations:{//this.$store.commit('方法名', 唯一的一个参数)
+  mutations: {//this.$store.commit('方法名', 唯一的一个参数)
+    addToCar(state, goodsInfo) {
+      // 1. 即将要加入的商品是否在购物车已存在, 
+      // 2. 如果存在只需要更新数量信息即可
+      // 3. 如果不存在只需要push进car数组即可
+      let flag = false
+      state.car.some(item => {
+        if (item.id === goodsInfo.id) {
+          item.count += parseInt(goodsInfo.count)
+          return flag = true
+        }
+      })
+      if (!flag) {
+        state.car.push(goodsInfo)
+      }
 
+    }
   },
-  getters:{//this.$store.getters.***
+  getters: {//this.$store.getters.***
 
   }
 })
 
 //轮播图组件
 import swiper from './components/swiper.vue'
-Vue.component('swiper',swiper)
+Vue.component('swiper', swiper)
 
 
 // 安装vue-pic-preview

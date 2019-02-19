@@ -22,8 +22,8 @@
         <div class="mui-card-content-inner">
           <p class="price">
             市场价:
-            <del>￥2399</del> &nbsp;&nbsp;销售价:
-            <span class="now_price">￥2199</span>
+            <del>￥{{ goodsInfo.market_price }}</del> &nbsp;&nbsp;销售价:
+            <span class="now_price">￥{{goodsInfo.sell_price}}</span>
           </p>
           <div class="numbox">
             <span class="title">购买数量:</span>
@@ -85,7 +85,7 @@ export default {
       id: this.$route.params.id,
       Lunbotu: [],  //轮播图
       goodsInfo: {},  //商品信息
-      buyCount: 1,    
+      buyCount: 1,    // 保存用户选中的商品数量， 默认，认为用户买1个
       ballFlag: false,  //控制小球
     };
   },
@@ -116,8 +116,11 @@ export default {
         // id: 商品id, count: 要购买的数量, price: 商品的单价, selected: false
       var goodsinfo = {
         id: this.id,
-        count: 
+        count: this.buyCount,
+        price:this.goodsInfo.sell_price,
+        selected: true
       }
+      this.$store.commit("addToCar",goodsinfo);``
     },
     beforeEnter(el) {
       el.style.transform = "translate(0px, 0px)";
