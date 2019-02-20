@@ -38,9 +38,13 @@ Vue.component('comment', comment)
 //注册vuex
 import Vuex from 'vuex'
 Vue.use(Vuex)
+
+//页面刚加载读取, 只要修改数据就保存
+let car = JSON.parse(localStorage.getItem('car') || '[]')
+
 var store = new Vuex.Store({
   state: {//this.$store.state.***
-    car: []
+    car: car
   },
   mutations: {//this.$store.commit('方法名', 唯一的一个参数)
     addToCar(state, goodsInfo) {
@@ -57,11 +61,17 @@ var store = new Vuex.Store({
       if (!flag) {
         state.car.push(goodsInfo)
       }
-
+      localStorage.setItem('car', JSON.stringify(state.car))
     }
   },
   getters: {//this.$store.getters.***
-
+    totalCount(state){
+      let sum = 0;
+      state.car.forEach(item =>{
+        sum += item.count
+      })
+      return sum
+    }
   }
 })
 

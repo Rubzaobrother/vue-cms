@@ -120,7 +120,7 @@ export default {
         price:this.goodsInfo.sell_price,
         selected: true
       }
-      this.$store.commit("addToCar",goodsinfo);``
+      this.$store.commit("addToCar",goodsinfo);
     },
     beforeEnter(el) {
       el.style.transform = "translate(0px, 0px)";
