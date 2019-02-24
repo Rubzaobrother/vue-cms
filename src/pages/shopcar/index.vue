@@ -12,13 +12,12 @@
               <div class="numbox">
                 <span class="price">￥{{ item.sell_price }}</span>
                 <div class="num">
-                  <input type="button" value="-">
-                  <input type="text">
-                  <input type="button" value="+">
+                  <input @click="subtract(item.id)" type="button" value="-">
+                  <input v-model="goodsCount[item.id]" type="number">
+                  <input @click="increment(item.id)" type="button" value="+">
                 </div>
                 <a href="#">删除</a>
               </div>
-              
             </div>
           </div>
         </div>
@@ -42,7 +41,8 @@ export default {
   },
   data() {
     return {
-      goodslist: []
+      goodslist: [],
+      goodsCount: this.$store.getters.goodsCount
     };
   },
   methods: {
@@ -59,6 +59,14 @@ export default {
           this.goodslist = result.body.message;
         }
       });
+    },
+    subtract(id) {
+      this.goodsCount[id] > 1 && this.goodsCount[id]--;
+      this.$store.commit("updateCount", { id, count: this.goodsCount[id] });
+    },
+    increment(id) {
+      this.goodsCount[id]++;
+       this.$store.commit("updateCount", { id, count: this.goodsCount[id] });
     }
   }
 };
