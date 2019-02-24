@@ -47,56 +47,55 @@ var store = new Vuex.Store({
     car
   },
   mutations: {//this.$store.commit('方法名', 唯一的一个参数)
-  addToCar(state, goodsInfo) {
-    // 加入购物车的业务逻辑:
-    // 1. 即将要加入的商品是否在购物车已存在, 
-    // 2. 如果存在只需要更新数量信息即可
-    // 3. 如果不存在只需要push进car数组即可
+    addToCar(state, goodsInfo) {
+      // 加入购物车的业务逻辑:
+      // 1. 即将要加入的商品是否在购物车已存在, 
+      // 2. 如果存在只需要更新数量信息即可
+      // 3. 如果不存在只需要push进car数组即可
 
-    // 假设法
-    // let flag = false
-    // state.car.some(item => {
-    //   if (item.id === goodsInfo.id) {
-    //     item.count += parseInt(goodsInfo.count)
-    //     // 当前要加入购物车的商品已存在于car中
-    //     return flag = true
-    //   }
-    // })
-    // // false表示没找到  在购物车中没有这个商品信息
-    // if (!flag) {
-    //   state.car.push(goodsInfo)
-    // }
+      // 假设法
+      // let flag = false
+      // state.car.some(item => {
+      //   if (item.id === goodsInfo.id) {
+      //     item.count += parseInt(goodsInfo.count)
+      //     // 当前要加入购物车的商品已存在于car中
+      //     return flag = true
+      //   }
+      // })
+      // // false表示没找到  在购物车中没有这个商品信息
+      // if (!flag) {
+      //   state.car.push(goodsInfo)
+      // }
 
-    // some forEach every filter findIndex
-    // findIndex的作用是用来根据条件查找索引
-    // 如果goodsInfo在car中存在, 就会返回goodsInfo的索引
-    // 如果不存在返回-1
-    // let index = state.car.findIndex(item => {
-    //   if (item.id === goodsInfo.id) {
-    //     return true
-    //   }
-    // })
+      // some forEach every filter findIndex
+      // findIndex的作用是用来根据条件查找索引
+      // 如果goodsInfo在car中存在, 就会返回goodsInfo的索引
+      // 如果不存在返回-1
+      // let index = state.car.findIndex(item => {
+      //   if (item.id === goodsInfo.id) {
+      //     return true
+      //   }
+      // })
 
-    // 不使用假设法
-    let index = state.car.findIndex(item => item.id === goodsInfo.id)
-    if (index === -1) {
-      // 表示没找到  不存在于购物车中
-      state.car.push(goodsInfo)
-    } else {
-      // 表示找到了  确实在购物车中已经有该商品了
-      state.car[index].count += parseInt(goodsInfo.count)
-    }
+      // 不使用假设法
+      let index = state.car.findIndex(item => item.id === goodsInfo.id)
+      if (index === -1) {
+        // 表示没找到  不存在于购物车中
+        state.car.push(goodsInfo)
+      } else {
+        // 表示找到了  确实在购物车中已经有该商品了
+        state.car[index].count += parseInt(goodsInfo.count)
+      }
 
-    localStorage.setItem('car', JSON.stringify(state.car))
-  },
-    updateCount(state, goodsInfo){
-      console.log(goodsInfo.id)
-      state.car.some(item=>{
-        if(item.id == goodsInfo.id){
+      localStorage.setItem('car', JSON.stringify(state.car))
+    },
+    updateCount(state, goodsInfo) {
+      state.car.some(item => {
+        if (item.id == goodsInfo.id) {
           // console.log(item.id, goodsInfo.id);
           item.count = goodsInfo.count
         }
-        
+
       })
       // state.car.some(item =>{
       //   if(item.id === goodsInfo.id){
@@ -105,19 +104,59 @@ var store = new Vuex.Store({
       // })
       localStorage.setItem('car', JSON.stringify(state.car))
     },
+    removeFromCar(state, id) {
+      state.car.some((item, i) => {
+        if (item.id == id) {
+          state.car.splice(i, 1)
+          return true
+        }
+      })
+      localStorage.setItem('car', JSON.stringify(state.car))
+    },
+    updateGoodsSelected(state, info) {
+      state.car.some(item => {
+        if (item.id == info.id) {
+          item.selected = info.selected
+        }
+      })
+      localStorage.setItem('car', JSON.stringify(state.car))
+    }
   },
   getters: {//this.$store.getters.***
-    totalCount(state){
+    totalCount(state) {
       let sum = 0;
-      state.car.forEach(item =>{
+      state.car.forEach(item => {
         sum += item.count
       })
       return sum
     },
-    goodsCount(state){
-      let o ={}
-      state.car.forEach(item =>{
+    goodsCount(state) {
+      let o = {}
+      state.car.forEach(item => {
         o[item.id] = item.count
+      })
+      return o
+    },
+    goodsSelected(state) {
+      // 手动创造一个 id对应count格式的对象
+      //  let o = {87: 8, 88: 5}
+      //  o[88]
+      let o = {}
+      state.car.forEach(item => {
+        o[item.id] = item.selected
+      })
+      return o
+    },
+    goodsCountAndAmount(state) {
+      let o = {
+        count: 0,  //勾选数量
+        amount: 0, //勾选总价
+      }
+      state.car.forEach(item => {
+        if (item.selected) {
+          o.count += item.count
+          o.amount += item.price * item.count
+        }
       })
       return o
     }

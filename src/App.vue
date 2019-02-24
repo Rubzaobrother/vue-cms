@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <mt-header fixed title="vue"></mt-header>
+    <mt-header fixed title="vue">
+      <mt-button v-show="hasBackBtn" @click="$router.go(-1)" slot="left" icon="back">返回</mt-button>
+    </mt-header>
     <!-- 中间 路由 router-view区域 -->
     <transition name='app'>
       <router-view/>
@@ -31,7 +33,22 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  data() {
+    return {
+      hasBackBtn:this.$route.path
+    }
+  },
+  watch: {
+    // 第一个参数新值  第二个参数老值
+    $route(to, from){
+      if(to.path === "/home"){
+        this.hasBackBtn = false
+      }else{
+        this.hasBackBtn = true
+      }
+    }
+  },
 };
 </script>
 
